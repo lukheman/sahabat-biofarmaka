@@ -15,14 +15,19 @@
 
             <div class="mb-4">
 
-                <h5 class="card-title"><i class="fas fa-leaf me-2"></i> <span>{{ $currentGejala->nama }}</span></h5>
+                @if ($currentGejala)
+                <h5 class="card-title"><i class="fas fa-leaf me-2"></i> <span>{{ $currentGejala?->nama }}</span></h5>
                 <p class="card-text">Seberapa yakin Anda bahwa tanaman Anda mengalami gejala ini?</p>
+
+                @endif
+
                 @error('currentCeraintyFactor')
                 <p class="text-danger">Pilih tingkat keyakinan terlebih dahulu untuk melanjutkan.</p>
                 @enderror
             </div>
 
             <!-- Confidence Level Buttons -->
+            @if ($currentGejala)
             <div class="confidence-buttons d-flex flex-wrap justify-content-center">
                 <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(1)"> Sangat Yakin</button>
                 <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(0.8)"> Yakin</button>
@@ -32,8 +37,9 @@
                 <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(0)"> Sangat Yakin</button>
             </div>
 
-            <div class="text-end">
-            </div>
+            @else
+                <p class="card-text text-danger">Belum ada gejala yang dapat ditanyakan</p>
+            @endif
 
         </x-card>
     </div>

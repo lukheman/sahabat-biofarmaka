@@ -20,20 +20,20 @@ class Profile extends Component
 
     public User $user;
 
-    #[Validate(['required', 'string'])]
     public string $name = '';
 
-    #[Validate(['required', 'email'])]
     public string $email = '';
 
-    #[Validate(['nullable', 'string', 'min:6', 'max:255'])]
     public string $password = '';
 
-    #[Validate('image|max:1024')]
     public $photo;
 
     public function updateProfile() {
-        $this->validate();
+        $this->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'password' => 'nullable|string|min:6|max:255',
+        ]);
 
         $this->user->name = $this->name;
         $this->user->email = $this->email;
