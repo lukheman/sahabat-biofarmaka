@@ -37,7 +37,7 @@
                 @foreach ($this->gejala as $item)
                 <tr>
                     <td>{{ $loop->index + $this->gejala->firstItem() }}</td>
-                    <td>{{ $item->kode }}</td>
+                    <td><b>{{ $item->kode }}</b></td>
                         <td>{{ $item->nama }}</td>
                     <td class="text-end">
 

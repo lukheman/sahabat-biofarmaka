@@ -92,11 +92,11 @@
                 @foreach ($this->penyakit as $item)
                 <tr>
                     <td>{{ $loop->index + $this->penyakit->firstItem() }}</td>
-                    <td>{{ $item->kode }}</td>
+                    <td><b>{{ $item->kode }}</b></td>
                         <td>{{ $item->nama }}</td>
                     <td class="text-end">
 
-                        <x-modal.trigger target="modal-gejala-penyakit" icon="eye" wire:click="detail({{ $item->id }})">Gejala Penyakit</x-modal.trigger>
+                        <x-modal.trigger outline target="modal-gejala-penyakit" icon="eye" wire:click="detail({{ $item->id }})">Gejala Penyakit</x-modal.trigger>
 
                     </td>
                 </tr>

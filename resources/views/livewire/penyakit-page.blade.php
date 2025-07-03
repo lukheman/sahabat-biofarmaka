@@ -41,7 +41,7 @@
                 @foreach ($this->penyakit as $item)
                 <tr>
                     <td>{{ $loop->index + $this->penyakit->firstItem() }}</td>
-                    <td>{{ $item->kode }}</td>
+                    <td><b>{{ $item->kode }}</b></td>
                         <td>{{ $item->nama }}</td>
                     <td class="text-end">
 
