@@ -14,6 +14,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', \App\Livewire\Profile::class)->name('profile');
     Route::get('/logout', \App\Http\Controllers\LogoutController::class)->name('logout');
 
+    Route::get('/tanaman', \App\Livewire\TanamanPage::class)->name('tanaman');
     Route::get('/penyakit', \App\Livewire\PenyakitPage::class)->name('penyakit');
     Route::get('/gejala', \App\Livewire\GejalaPage::class)->name('gejala');
     Route::get('/basis-pengetahuan', \App\Livewire\BasisPengetahuanPage::class)->name('basis-pengetahuan');
