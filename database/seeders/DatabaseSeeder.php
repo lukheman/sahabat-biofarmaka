@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Penyakit;
 use App\Models\Gejala;
+use App\Models\Tanaman;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -18,6 +19,7 @@ class DatabaseSeeder extends Seeder
 
         Penyakit::factory()->count(20)->create();
         Gejala::factory()->count(7)->create();
+        Tanaman::factory()->count(5)->create();
 
         $penyakitAll = Penyakit::all();
         $gejalaAll = Gejala::all();
