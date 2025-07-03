@@ -3,6 +3,7 @@
 namespace App\Livewire\Diagnosis;
 
 use App\Models\Gejala;
+use App\Models\Tanaman;
 use App\Providers\CertaintyFactorProvider;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
@@ -14,9 +15,11 @@ use Livewire\Attributes\Title;
 #[Layout('layouts.guest')]
 class Index extends Component
 {
+    public ?int $selectedPlant = null;
+
     public ?Gejala $currentGejala = null;
 
-    #[Validate('required')]
+    #[Validate('required', message: 'Pilih tingkat keyakinan terlebih dahulu untuk melanjutkan.')]
     public ?float $currentCeraintyFactor = null;
 
     public array $certaintyFactorUser = [];
@@ -24,13 +27,33 @@ class Index extends Component
     public $showHasil = false;
 
     #[Computed]
-    public function gejala() {
-        return Gejala::all();
+    public function tanaman() {
+        return Tanaman::all();
+    }
+
+    #[Computed]
+    public function gejala()
+    {
+        // Filter symptoms by selected plant, or return all if no plant is selected
+        if ($this->selectedPlant) {
+            return Gejala::where('plant_type', $this->selectedPlant)->get();
+        }
+        return collect(); // Return empty collection until a plant is selected
+    }
+
+    public function selectPlant($id)
+    {
+        $this->selectedPlant = $id;
+        $this->currentGejala = Gejala::find($id);
+        $this->certaintyFactorUser = []; // Reset previous answers
+        $this->showHasil = false; // Ensure result is hidden
     }
 
     public function setCeraintyFactor()
     {
-        $this->certaintyFactorUser[$this->currentGejala->id] = $this->currentCeraintyFactor;
+        if ($this->currentGejala) {
+            $this->certaintyFactorUser[$this->currentGejala->id] = $this->currentCeraintyFactor;
+        }
     }
 
     public function updateCurrentCertaintyFactor(float $value)
@@ -39,7 +62,6 @@ class Index extends Component
         $this->nextGejala();
     }
 
-
     public function nextGejala()
     {
         $this->validate();
@@ -47,25 +69,26 @@ class Index extends Component
         $this->reset('currentCeraintyFactor');
 
         $gejala = Gejala::where('id', '>', $this->currentGejala->id)->first();
+
         if ($gejala) {
             $this->currentGejala = $gejala;
         } else {
-            // gejala terakhir, lakukan diagnosis dengan Certainty Factor
+            // No more symptoms, start diagnosis
             $this->startDiagnosis();
         }
     }
 
-    public function startDiagnosis() {
-
-        $diagnosa = CertaintyFactorProvider::diagnosis( $this->certaintyFactorUser);
+    public function startDiagnosis()
+    {
+        $diagnosa = CertaintyFactorProvider::diagnosis($this->certaintyFactorUser);
         $this->dispatch('showHasil', $diagnosa);
         $this->showHasil = true;
-
     }
 
     public function mount()
     {
-        $this->currentGejala = Gejala::first();
+        // Don't load any symptom until a plant is selected
+        $this->currentGejala = null;
     }
 
     public function render()
