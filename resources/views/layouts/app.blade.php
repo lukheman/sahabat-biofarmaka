@@ -158,27 +158,30 @@
 
         document.addEventListener('livewire:initialized', () => {
 
-            Livewire.on('toast', ({ message, variant}) => {
-
+            Livewire.on('toast', ({ message, variant }) => {
                 const backgroundColors = {
-                    success: "#28a745",
-                    error: "#dc3545",
-                    warning: "#ffc107"
+                    success: "#ffffff",
+                    error: "#ffffff",
+                    warning: "#ffffff"
                 };
 
-
                 Toastify({
-                    text: event.detail.message,
+                    text: message,
                     duration: 3000,
                     close: true,
-                    gravity: "top", // `top` or `bottom`
-                    position: "right", // `left`, `center` or `right`
-                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    gravity: "top",
+                    position: "right",
+                    stopOnFocus: true,
                     style: {
-                        background: backgroundColors[variant] || "#343a40",
+                        background: backgroundColors[variant] || "#ffffff",
+                        border: "2px solid #28a745",
+                        borderRadius: "8px",
+                        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                        color: "#333333",
+                        fontWeight: "500",
+                        padding: "12px 20px"
                     },
                 }).showToast();
-
             });
 
 
