@@ -5,7 +5,7 @@
         <a href="#" class="brand-link">
             <!--begin::Brand Image-->
             <img
-                src="{{ asset('assets/img/AdminLTELogo.png')}}"
+                src="{{ asset('storage/' . (auth()->user()->photo ?? '')) }}"
                 alt="AdminLTE Logo"
                 class="brand-image opacity-75 shadow"
             />
