@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        // Penyakit::factory()->count(20)->create();
-        // Gejala::factory()->count(7)->create();
-        // Tanaman::factory()->count(5)->create();
+        Penyakit::factory()->count(20)->create();
+        Gejala::factory()->count(7)->create();
+        Tanaman::factory()->count(5)->create();
 
         // $penyakitAll = Penyakit::all();
         // $gejalaAll = Gejala::all();

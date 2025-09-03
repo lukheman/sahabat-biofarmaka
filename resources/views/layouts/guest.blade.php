@@ -292,10 +292,15 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="{{ route('landing') }}">Beranda</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#tentang">Tentang</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#gejala">Gejala</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#penyakit">Penyakit</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('landing')}}#tentang">Tentang</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('landing')}}#gejala">Gejala</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('landing')}}#penyakit">Penyakit</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('diagnosis')}}">Diagnosis</a></li>
+                    @auth
+                    <li class="nav-item"><a class="nav-link btn btn-primary ms-2" href="{{ route('dashboard' ) }}">Dashboard</a></li>
+                    @else
                     <li class="nav-item"><a wire:navigate class="nav-link btn btn-primary ms-2" href="{{ route('login' ) }}">Masuk</a></li>
+                    @endauth
                 </ul>
             </div>
         </div>

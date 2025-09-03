@@ -12,5 +12,9 @@ class Tanaman extends Model
     protected $table = 'tanaman';
     protected $guarded = [];
 
+    public function penyakit() {
+        return $this->belongsToMany(Penyakit::class, 'penyakit_tanaman', 'id_tanaman', 'id_penyakit');
+    }
+
 
 }

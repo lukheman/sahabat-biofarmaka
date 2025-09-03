@@ -18,4 +18,9 @@ class Penyakit extends Model
         // mb = measure belif
         // md = measure disbelief
     }
+
+    public function tanaman() {
+        return $this->belongsToMany(Tanaman::class, 'penyakit_tanaman', 'id_penyakit', 'id_tanaman');
+    }
+
 }

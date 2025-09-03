@@ -18,6 +18,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/penyakit', \App\Livewire\PenyakitPage::class)->name('penyakit');
     Route::get('/gejala', \App\Livewire\GejalaPage::class)->name('gejala');
     Route::get('/basis-pengetahuan', \App\Livewire\BasisPengetahuanPage::class)->name('basis-pengetahuan');
+
+    Route::get('/penyakit-tanaman', \App\Livewire\PenyakitTanamanTable::class)->name('penyakit-tanaman');
 });
 
 

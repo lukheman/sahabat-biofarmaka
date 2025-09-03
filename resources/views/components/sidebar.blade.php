@@ -33,6 +33,9 @@
                 <x-nav-item icon="bug" :active="request()->routeIs('penyakit*')" :href="route('penyakit')">Penyakit</x-nav-item>
                 <x-nav-item icon="exclamation-circle-fill" :active="request()->routeIs('gejala*')" :href="route('gejala')">Gejala</x-nav-item>
                 <x-nav-item icon="book-half" :active="request()->routeIs('basis-pengetahuan')" :href="route('basis-pengetahuan')">Basis Pengetahuan</x-nav-item>
+
+                <x-nav-item icon="book-half" :active="request()->routeIs('penyakit-tanaman')" :href="route('penyakit-tanaman')">Penyakit Tanaman</x-nav-item>
+
                 <x-nav-item icon="clipboard2" :active="request()->routeIs('diagnosis*')" :href="route('diagnosis')">Diagnosis</x-nav-item>
                 <li class="nav-header">PROFILE</li>
                     <x-nav-item icon="person-fill" :active="request()->routeIs('profile*')" :href="route('profile')" >Profile</x-nav-item>
