@@ -12,8 +12,8 @@ class Gejala extends Model
     protected $table = 'gejala';
     protected $guarded = [];
 
-    public function penyakit() {
-        return $this->belongsToMany(Penyakit::class, 'basis_pengetahuan', 'id_gejala', 'id_penyakit');
+    public function penyakitTanaman() {
+        return $this->belongsToMany(Penyakit::class, 'gejala_penyakit_tanaman', 'id_gejala', 'id_penyakit_tanaman');
     }
 
 }

@@ -2,12 +2,8 @@
 
     <x-card>
 
-
-        <x-modal title="{{ $this->modalTitle }}" id="modal-gejala-penyakit" size="xl">
-
-
-
-            <div class="row">
+        <x-modal title="Edit Gejala Penyakit" id="modal-gejala-penyakit" size="xl">
+  <div class="row">
 
 
             <div class="col-12 col-md-7">
@@ -25,16 +21,16 @@
 
                     <x-slot:rows>
 
-                        @if ($selectedPenyakit)
+                        @if ($selectedPenyakitTanaman)
 
-                            @foreach ($selectedPenyakit->gejala as $item)
+                            @foreach ($selectedPenyakitTanaman->gejala as $item)
                             <tr>
                                 <td>{{ $item->kode }}</td>
                                 <td>{{ $item->nama }}</td>
                                 <td> <x-badge variant="success">{{ $item->pivot->mb }}</x-badge></td>
                                 <td> <x-badge variant="warning">{{ $item->pivot->md }}</x-badge></td>
                                 <td class="text-end">
-            <x-button size="sm" variant="warning" wire:click="editGejalaPenyakit({{ $item->id }})">Edit</x-button>
+            <x-button size="sm" variant="warning" wire:click="editGejala({{ $item->id }})">Edit</x-button>
                                     <x-button size="sm" variant="danger"  wire:click="deleteGejalaPenyakit({{ $item->id }})">Hapus</x-button>
                                 </td>
                             </tr>
@@ -53,7 +49,7 @@
 
             <x-card >
 
-            <form wire:submit.prevent="saveGejalaPenyakit">
+            <form wire:submit.prevent="saveGejalaPenyakitTanaman">
 
                 <x-select placeholder="Pilih Gejala" model="selectedIdGejala" label="Gejala">
                     @foreach ($this->gejala as $item)
@@ -74,29 +70,75 @@
         </div>
 
 
+        </x-modal>
+
+
+        <x-modal title="{{ $this->modalTitle }}" id="modal-basis-pengetahuan" size="xl">
+
+
+
+            <div class="row">
+
+
+            <div class="col-12 col-md-12">
+            <x-card >
+
+                <x-table>
+
+                    <x-slot:columns>
+                        <th>Kode Penyakit</th>
+                        <th>Nama Penyakit</th>
+                        <th class="text-end">Aksi</th>
+                    </x-slot:columns>
+
+                    <x-slot:rows>
+
+                        @if ($selectedTanaman)
+
+                            @foreach ($selectedTanaman->penyakit as $item)
+                            <tr>
+                                <td>{{ $item->kode }}</td>
+                                <td>{{ $item->nama }}</td>
+                                <td class="text-end">
+            <x-modal.trigger target="modal-gejala-penyakit" size="sm" variant="warning" wire:click="editGejalaPenyakitTanaman({{ $item->pivot->id }})">Gejala Penyakit</x-modal.trigger>
+                                </td>
+                            </tr>
+                        @endforeach
+                        @endif
+
+
+                    </x-slot:rows>
+
+                </x-table>
+
+            </x-card>
+             </div>
+
+
+        </div>
+
+
 
 
         </x-modal>
 
 
-        <x-table :paginate="$this->penyakit">
+        <x-table :paginate="$this->tanaman">
 
             <x-slot:columns>
                 <th>#</th>
-                <th>Kode</th>
-                <th>Nama</th>
+                <th>Nama Tanaman</th>
                 <th class="text-end">Aksi</th>
             </x-slot:columns>
 
             <x-slot:rows>
-                @foreach ($this->penyakit as $item)
+                @foreach ($this->tanaman as $item)
                 <tr>
                     <td>{{ $loop->index + $this->penyakit->firstItem() }}</td>
-                    <td><b>{{ $item->kode }}</b></td>
                         <td>{{ $item->nama }}</td>
                     <td class="text-end">
 
-                        <x-modal.trigger outline target="modal-gejala-penyakit" icon="eye" wire:click="detail({{ $item->id }})">Gejala Penyakit</x-modal.trigger>
+                        <x-modal.trigger target="modal-basis-pengetahuan" icon="eye" wire:click="basisPengetahuanPenyakit({{ $item->id }})">Basis Pengetahuan</x-modal.trigger>
 
                     </td>
                 </tr>

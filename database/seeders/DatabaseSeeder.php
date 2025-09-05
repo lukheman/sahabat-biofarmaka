@@ -17,28 +17,12 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        Penyakit::factory()->count(20)->create();
-        Gejala::factory()->count(7)->create();
-        Tanaman::factory()->count(5)->create();
+        $this->call([
+            GejalaSeeder::class,
+            PenyakitSeeder::class,
+        ]);
 
-        // $penyakitAll = Penyakit::all();
-        // $gejalaAll = Gejala::all();
-        //
-        // foreach ($penyakitAll as $penyakit) {
-        //     $randomGejala = $gejalaAll->random(rand(1, 5));
-        //
-        //     // Siapkan data pivot dengan bobot acak
-        //     $pivotData = [];
-        //
-        //     foreach ($randomGejala as $gejala) {
-        //         $pivotData[$gejala->id] = [
-        //             'mb' => rand(1, 100) / 100,  // hasil antara 0.01 - 1.00
-        //             'md' => rand(1, 100) / 100  // hasil antara 0.01 - 1.00
-        //         ];
-        //     }
-        //
-        //     $penyakit->gejala()->attach($pivotData);
-        // }
+        Tanaman::factory(3)->create();
 
         User::factory()->create([
             'name' => 'Admin',

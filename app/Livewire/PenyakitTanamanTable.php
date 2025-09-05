@@ -11,7 +11,7 @@ use Livewire\WithPagination;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Title;
 
-#[Title('Penakit Tanaman')]
+#[Title('Penyakit Tanaman')]
 class PenyakitTanamanTable extends Component
 {
     use WithPagination;
@@ -20,17 +20,16 @@ class PenyakitTanamanTable extends Component
 
     public ?Tanaman $selectedTanaman = null;
     public $namaTanaman = '';
-
-    public $modalTitle = '';
+    public $selectedPenyakitTanamanId = [];
 
     #[Computed]
     public function penyakit() {
-        return Penyakit::paginate(10);
+        return Penyakit::query()->paginate(10);
     }
 
     #[Computed]
     public function tanaman() {
-        return Tanaman::paginate(10);
+        return Tanaman::query()->paginate(10);
     }
 
     #[Computed]
@@ -38,9 +37,15 @@ class PenyakitTanamanTable extends Component
         return "Penyakit $this->namaTanaman";
     }
 
-    public function detail($id) {
+    public function simpanPenyakitTanaman() {
+        $this->selectedTanaman->penyakit()->sync($this->selectedPenyakitTanamanId);
+        $this->notifySuccess("Berhasil menyimpan penyakit tanaman $this->namaTanaman");
+    }
+
+    public function penyakitTanaman($id) {
         $this->selectedTanaman = Tanaman::with('penyakit')->find($id);
         $this->namaTanaman = $this->selectedTanaman->nama;
+        $this->selectedPenyakitTanamanId = $this->selectedTanaman->penyakit->pluck('id')->toArray();
     }
 
     public function render()

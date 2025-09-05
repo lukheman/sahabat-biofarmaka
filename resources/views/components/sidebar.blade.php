@@ -30,7 +30,7 @@
                 <x-nav-item icon="grid" :active="request()->routeIs('dashboard')" :href="route('dashboard')">Penyakit</x-nav-item>
                 <li class="nav-header">MENU</li>
                 <x-nav-item icon="tree-fill" :active="request()->routeIs('tanaman*')" :href="route('tanaman')">Tanaman</x-nav-item>
-                <x-nav-item icon="bug" :active="request()->routeIs('penyakit*')" :href="route('penyakit')">Penyakit</x-nav-item>
+                <x-nav-item icon="bug" :active="request()->routeIs('penyakit')" :href="route('penyakit')">Penyakit</x-nav-item>
                 <x-nav-item icon="exclamation-circle-fill" :active="request()->routeIs('gejala*')" :href="route('gejala')">Gejala</x-nav-item>
                 <x-nav-item icon="book-half" :active="request()->routeIs('basis-pengetahuan')" :href="route('basis-pengetahuan')">Basis Pengetahuan</x-nav-item>
 

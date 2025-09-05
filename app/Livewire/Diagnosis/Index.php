@@ -15,7 +15,7 @@ use Livewire\Attributes\Title;
 #[Layout('layouts.guest')]
 class Index extends Component
 {
-    public ?int $selectedPlant = null;
+    public ?Tanaman $selectedTanaman;
 
     public ?Gejala $currentGejala = null;
 
@@ -34,17 +34,16 @@ class Index extends Component
     #[Computed]
     public function gejala()
     {
-        // Filter symptoms by selected plant, or return all if no plant is selected
-        if ($this->selectedPlant) {
-            return Gejala::where('plant_type', $this->selectedPlant)->get();
+        if ($this->selectedTanaman) {
+            return Gejala::query()->get();
         }
         return collect(); // Return empty collection until a plant is selected
     }
 
-    public function selectPlant($id)
+    public function selectPlant(int $id)
     {
-        $this->selectedPlant = $id;
-        $this->currentGejala = Gejala::find($id);
+        $this->selectedTanaman = Tanaman::query()->find($id);
+        $this->currentGejala = Gejala::query()->find($id);
         $this->certaintyFactorUser = []; // Reset previous answers
         $this->showHasil = false; // Ensure result is hidden
     }
@@ -68,7 +67,7 @@ class Index extends Component
         $this->setCeraintyFactor();
         $this->reset('currentCeraintyFactor');
 
-        $gejala = Gejala::where('id', '>', $this->currentGejala->id)->first();
+        $gejala = Gejala::query()->where('id', '>', $this->currentGejala->id)->first();
 
         if ($gejala) {
             $this->currentGejala = $gejala;
@@ -80,7 +79,7 @@ class Index extends Component
 
     public function startDiagnosis()
     {
-        $diagnosa = CertaintyFactorProvider::diagnosis($this->certaintyFactorUser);
+        $diagnosa = CertaintyFactorProvider::diagnosis($this->certaintyFactorUser, $this->selectedTanaman);
         $this->dispatch('showHasil', $diagnosa);
         $this->showHasil = true;
     }

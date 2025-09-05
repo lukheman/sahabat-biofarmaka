@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\PenyakitTanaman;
+use App\Models\Tanaman;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Penyakit;
 
@@ -24,14 +26,16 @@ class CertaintyFactorProvider extends ServiceProvider
      * - Gabungkan CF gejala-gejala yang sama pada penyakit yang sama.
      * - Kembalikan penyakit dengan nilai CF tertinggi.
      */
-    public static function diagnosis(array $ceraintyFactorUser): array {
+    public static function diagnosis(array $ceraintyFactorUser, Tanaman $tanaman): array {
 
-        $penyakitAll = Penyakit::with('gejala')->get();
+        $penyakitAll = Tanaman::with(['penyakit'])->find($tanaman->id);
+
 
         $cfPenyakit = [];
 
-        foreach ($penyakitAll as $penyakit) {
-            foreach ($penyakit->gejala as $gejala) {
+        foreach ($penyakitAll->penyakit as $penyakitTanaman) {
+            $gejalaAll = PenyakitTanaman::with('gejala')->find($penyakitTanaman->pivot->id)->gejala;
+            foreach ($gejalaAll as $gejala) {
                 // cek apakah gejala ada pada ceraintyFactorUser
                 if (isset($ceraintyFactorUser[$gejala->id])) {
                     // jika ada, ambil mb dan md dari pivot
@@ -45,10 +49,10 @@ class CertaintyFactorProvider extends ServiceProvider
                     $cf = self::cfPakarMultiplyCfUser($cfPakar, $ceraintyFactorUser[$gejala->id]);
 
                     // simpan hasil cf untuk penyakit
-                    if (isset($cfPenyakit[$penyakit->id])) {
-                        $cfPenyakit[$penyakit->id] = self::combine($cfPenyakit[$penyakit->id], $cf);
+                    if (isset($cfPenyakit[$penyakitTanaman->id])) {
+                        $cfPenyakit[$penyakitTanaman->id] = self::combine($cfPenyakit[$penyakitTanaman->id], $cf);
                     } else {
-                        $cfPenyakit[$penyakit->id] = $cf;
+                        $cfPenyakit[$penyakitTanaman->id] = $cf;
                     }
                 }
             }

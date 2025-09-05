@@ -4,6 +4,8 @@ namespace App\Livewire;
 
 use App\Models\Gejala;
 use App\Models\Penyakit;
+use App\Models\PenyakitTanaman;
+use App\Models\Tanaman;
 use App\Traits\HasNotify;
 use App\Traits\WithConfirmation;
 use Livewire\Attributes\Computed;
@@ -22,37 +24,43 @@ class BasisPengetahuanPage extends Component
     use HasNotify;
     use WithConfirmation;
 
-    public ?Penyakit $selectedPenyakit;
+    public ?PenyakitTanaman $selectedPenyakitTanaman = null;
+    public ?Tanaman $selectedTanaman = null;
     public $namaPenyakit = '';
     public $kodePenyakit = '';
 
     public $modalState = 'detail';
 
+    public ?Gejala $selectedGejala;
     public ?int $selectedIdGejala;
     public float $mb = 0;
     public float $md = 0;
 
-    public function saveGejalaPenyakit() {
+    public function saveGejalaPenyakitTanaman() {
         // selain menambahakan gejala gejala, juga memperbarui gejaa yang sudah ada
 
-        $this->selectedPenyakit->gejala()->syncWithoutDetaching([
+        PenyakitTanaman::with('gejala')->find($this->selectedPenyakitTanaman->id)->gejala()->syncWithoutDetaching([
             $this->selectedIdGejala => [
                 'mb' => $this->mb,
                 'md' => $this->md,
             ]
         ]);
 
+
         $this->notifySuccess('Berhasil memperbarui gejala ke penyakit');
 
     }
 
-    public function editGejalaPenyakit($id) {
-        $this->selectedIdGejala = $id;
-        $gejala = $this->selectedPenyakit->gejala()->find($id);
-        $this->mb = $gejala->pivot->mb;
-        $this->md = $gejala->pivot->md;
+    public function editGejalaPenyakitTanaman($id) {
+        $this->selectedPenyakitTanaman = PenyakitTanaman::query()->with('gejala')->find($id);
+    }
 
+    public function editGejala(int $id) {
 
+        $this->selectedGejala = $this->selectedPenyakitTanaman->gejala->find($id);
+        $this->mb =$this->selectedGejala->pivot->mb;
+        $this->md =$this->selectedGejala->pivot->md;
+        $this->selectedIdGejala = $this->selectedGejala->id;
     }
 
 
@@ -64,7 +72,7 @@ class BasisPengetahuanPage extends Component
 
     #[On('deleteConfirmed')]
     public function deleteConfirmed() {
-        $this->selectedPenyakit->gejala()->detach($this->selectedIdGejala);
+        $this->selectedPenyakitTanaman->gejala()->detach($this->selectedIdGejala);
         $this->notifySuccess('Berhasil menghapus gejala dari penyakit');
     }
 
@@ -74,9 +82,18 @@ class BasisPengetahuanPage extends Component
         $this->kodePenyakit = $this->selectedPenyakit->kode;
     }
 
+    public function basisPengetahuanPenyakit($id) {
+        $this->selectedTanaman = Tanaman::query()->with('penyakit')->find($id);
+    }
+
     #[Computed]
     public function penyakit() {
         return Penyakit::paginate(10);
+    }
+
+    #[Computed]
+    public function tanaman() {
+        return Tanaman::paginate(10);
     }
 
     #[Computed]

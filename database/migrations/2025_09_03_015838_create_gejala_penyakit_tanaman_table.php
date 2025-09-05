@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('gejala_penyakit_tanaman', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_gejala')->constrained('gejala')->cascadeOnDelete();
-            $table->foreignId('id_penyakit')->constrained('penyakit')->cascadeOnDelete();
+            $table->foreignId('id_penyakit_tanaman')->constrained('penyakit_tanaman')->cascadeOnDelete();
             $table->float('mb'); // measure belief
             $table->float('md'); // measure disbelief
             $table->timestamps();

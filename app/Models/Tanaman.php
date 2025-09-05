@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Tanaman extends Model
 {
@@ -12,8 +13,9 @@ class Tanaman extends Model
     protected $table = 'tanaman';
     protected $guarded = [];
 
-    public function penyakit() {
-        return $this->belongsToMany(Penyakit::class, 'penyakit_tanaman', 'id_tanaman', 'id_penyakit');
+    public function penyakit(): BelongsToMany {
+        return $this->belongsToMany(Penyakit::class, 'penyakit_tanaman', 'id_tanaman', 'id_penyakit')
+            ->withPivot('id');
     }
 
 

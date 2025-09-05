@@ -6,7 +6,7 @@
 
         <div wire:show="!showHasil">
             <x-card title="Diagnosis">
-                @if (!$selectedPlant)
+                @if (!$selectedTanaman)
                     <div class="mb-4">
                         <h5 class="card-title"><i class="fas fa-leaf me-2"></i> Pilih Jenis Tanaman</h5>
                         <p class="card-text">Pilih jenis tanaman yang akan didiagnosis:</p>
@@ -20,7 +20,7 @@
                     <div class="mb-4">
                         @if ($currentGejala)
                             <h5 class="card-title"><i class="fas fa-leaf me-2"></i> <span>{{ $currentGejala->nama }}</span></h5>
-                            <p class="card-text">Seberapa yakin Anda bahwa tanaman {{ $selectedPlant }} mengalami gejala ini?</p>
+                            <p class="card-text">Seberapa yakin Anda bahwa tanaman {{ $selectedTanaman->nama }} mengalami gejala ini?</p>
                         @endif
 
                         @error('currentCeraintyFactor')
@@ -39,7 +39,7 @@
                             <button class="btn btn-outline-primary m-1" wire:click="updateCurrentCertaintyFactor(0)">Tidak Yakin</button>
                         </div>
                     @else
-                        <p class="card-text text-danger">Belum ada gejala yang dapat ditanyakan untuk {{ $selectedPlant }}</p>
+                        <p class="card-text text-danger">Belum ada gejala yang dapat ditanyakan untuk {{ $selectedTanaman }}</p>
                     @endif
                 @endif
             </x-card>
