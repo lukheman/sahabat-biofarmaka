@@ -12,15 +12,22 @@ class Hasil extends Component
 {
     public ?float $cf;
     public ?Penyakit $penyakit;
+    public $typeHasil = 'ada';
 
     #[On('showHasil')]
     public function showHasil(array $diagnosa)
     {
-        $this->cf = $diagnosa['cf'];
-        $this->penyakit = Penyakit::find($diagnosa['id_penyakit']);
+        if($diagnosa === []) {
+            $this->typeHasil = 'kosong';
+        } else {
+            $this->typeHasil = 'ada';
+            $this->cf = $diagnosa['cf'];
+            $this->penyakit = Penyakit::find($diagnosa['id_penyakit']);
+        }
+
     }
 
-    public function repeatDiagnosis() { 
+    public function repeatDiagnosis() {
         $this->redirectRoute('diagnosis');
     }
 

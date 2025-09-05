@@ -70,6 +70,10 @@ class CertaintyFactorProvider extends ServiceProvider
      */
     public static function getMaxCfPenyakit(array $cfPenyakit): array
     {
+        if(count($cfPenyakit) === 0) {
+            return [];
+        }
+
         $maxCf = max($cfPenyakit);
         $penyakitId = array_search($maxCf, $cfPenyakit);
         return [
