@@ -12,7 +12,7 @@
     <!-- Tentang Section -->
     <section id="tentang" class="bg-light">
         <div class="container text-center">
-            <h2 class="section-title animate__fadeIn">Tentang Biofarkaka</h2>
+            <h2 class="section-title animate__fadeIn">Tentang Biofarmaka</h2>
             <p class="mx-auto animate__fadeIn" style="max-width: 700px; animation-delay: 0.3s;">
                 Biofarkaka adalah sistem pakar inovatif yang dirancang untuk membantu Anda mendeteksi kemungkinan penyakit tanaman biofarmaka berdasarkan gejala yang terlihat. Dengan teknologi berbasis pengetahuan, kami memberikan diagnosa awal yang cepat, akurat, dan mudah dipahami.
             </p>
