@@ -27,19 +27,27 @@
                 role="menu"
                 data-accordion="false"
             >
-                <x-nav-item icon="grid" :active="request()->routeIs('dashboard')" :href="route('dashboard')">Penyakit</x-nav-item>
-                <li class="nav-header">MENU</li>
-                <x-nav-item icon="tree-fill" :active="request()->routeIs('tanaman*')" :href="route('tanaman')">Tanaman</x-nav-item>
-                <x-nav-item icon="bug" :active="request()->routeIs('penyakit')" :href="route('penyakit')">Penyakit</x-nav-item>
-                <x-nav-item icon="exclamation-circle-fill" :active="request()->routeIs('gejala*')" :href="route('gejala')">Gejala</x-nav-item>
-                <x-nav-item icon="book-half" :active="request()->routeIs('basis-pengetahuan')" :href="route('basis-pengetahuan')">Basis Pengetahuan</x-nav-item>
+<x-nav-item icon="speedometer2" :active="request()->routeIs('dashboard')" :href="route('dashboard')">Dashboard</x-nav-item>
 
-                <x-nav-item icon="book-half" :active="request()->routeIs('penyakit-tanaman')" :href="route('penyakit-tanaman')">Penyakit Tanaman</x-nav-item>
+<li class="nav-header">MENU</li>
 
-                <x-nav-item icon="clipboard2" :active="request()->routeIs('diagnosis*')" :href="route('diagnosis')">Diagnosis</x-nav-item>
-                <li class="nav-header">PROFILE</li>
-                    <x-nav-item icon="person-fill" :active="request()->routeIs('profile*')" :href="route('profile')" >Profile</x-nav-item>
-                    <x-nav-item :href="route('logout')" icon="box-arrow-right">Logout</x-nav-item>
+<x-nav-item icon="flower1" :active="request()->routeIs('tanaman*')" :href="route('tanaman')">Tanaman</x-nav-item>
+
+<x-nav-item icon="bug-fill" :active="request()->routeIs('penyakit')" :href="route('penyakit')">Penyakit</x-nav-item>
+
+<x-nav-item icon="exclamation-triangle-fill" :active="request()->routeIs('gejala*')" :href="route('gejala')">Gejala</x-nav-item>
+
+<x-nav-item icon="book" :active="request()->routeIs('basis-pengetahuan')" :href="route('basis-pengetahuan')">Basis Pengetahuan</x-nav-item>
+
+<x-nav-item icon="journals" :active="request()->routeIs('penyakit-tanaman')" :href="route('penyakit-tanaman')">Penyakit Tanaman</x-nav-item>
+
+<x-nav-item icon="clipboard-check" :active="request()->routeIs('diagnosis*')" :href="route('diagnosis')">Diagnosis</x-nav-item>
+
+<li class="nav-header">PROFILE</li>
+
+<x-nav-item icon="person-circle" :active="request()->routeIs('profile*')" :href="route('profile')" >Profile</x-nav-item>
+
+<x-nav-item icon="box-arrow-right" :href="route('logout')">Logout</x-nav-item>
             </ul>
             <!--end::Sidebar Menu-->
         </nav>
