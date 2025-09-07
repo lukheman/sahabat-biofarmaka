@@ -39,7 +39,7 @@
                             <button class="btn btn-outline-primary m-1" wire:click="updateCurrentCertaintyFactor(0)">Tidak Yakin</button>
                         </div>
                     @else
-                        <p class="card-text text-danger">Belum ada gejala yang dapat ditanyakan untuk {{ $selectedTanaman }}</p>
+                        <p class="card-text text-danger">Belum ada gejala yang dapat ditanyakan untuk {{ $selectedTanaman->nama }}</p>
                     @endif
                 @endif
             </x-card>
