@@ -32,9 +32,9 @@
 
 <li class="nav-header">MENU</li>
 
-<x-nav-item icon="flower1" :active="request()->routeIs('tanaman*')" :href="route('tanaman')">Tanaman</x-nav-item>
+<x-nav-item icon="flower1" :active="request()->routeIs('tanaman*')" :href="route('tanaman')">Nama Tanaman</x-nav-item>
 
-<x-nav-item icon="bug-fill" :active="request()->routeIs('penyakit')" :href="route('penyakit')">Penyakit</x-nav-item>
+<x-nav-item icon="bug-fill" :active="request()->routeIs('penyakit')" :href="route('penyakit')">Hama & Penyakit</x-nav-item>
 
 <x-nav-item icon="exclamation-triangle-fill" :active="request()->routeIs('gejala*')" :href="route('gejala')">Gejala</x-nav-item>
 
