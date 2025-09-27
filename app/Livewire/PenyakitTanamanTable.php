@@ -22,6 +22,13 @@ class PenyakitTanamanTable extends Component
     public $namaTanaman = '';
     public $selectedPenyakitTanamanId = [];
 
+    public $penyakitList;
+
+    public function mount() {
+        $this->penyakitList = Penyakit::all();
+    }
+
+
     #[Computed]
     public function penyakit() {
         return Penyakit::query()->paginate(10);

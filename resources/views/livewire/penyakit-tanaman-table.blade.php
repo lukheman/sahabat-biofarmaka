@@ -11,7 +11,7 @@
 
 
             <div class="col-12 col-md-12">
-        @foreach ($this->penyakit as $item)
+        @foreach ($penyakitList as $item)
         <div class="form-check">
             <input wire:model="selectedPenyakitTanamanId" class="form-check-input" type="checkbox" value="{{ $item->id }}">
             <label class="form-check-label">{{ $item->nama }}</label>
