@@ -9,6 +9,7 @@ use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use App\Models\Penyakit;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 use App\Traits\HasNotify;
@@ -23,6 +24,7 @@ class PenyakitPage extends Component
 
     use WithPagination;
     use WithConfirmation;
+    use WithFileUploads;
 
     public PenyakitForm $form;
 
@@ -52,6 +54,8 @@ class PenyakitPage extends Component
         $this->form->kode = $penyakit['kode'];
         $this->form->deskripsi = $penyakit['deskripsi'];
         $this->form->solusi = $penyakit['solusi'];
+        $this->form->photo = $penyakit['photo'];
+
     }
 
     public function save() {
@@ -67,6 +71,7 @@ class PenyakitPage extends Component
         $this->form->kode = $penyakit['kode'];
         $this->form->deskripsi = $penyakit['deskripsi'];
         $this->form->solusi = $penyakit['solusi'];
+        $this->form->photo = $penyakit['photo'];
 
         $this->form->penyakit = Penyakit::find($penyakit['id']);
     }
